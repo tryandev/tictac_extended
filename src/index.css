@@ -1,13 +1,251 @@
 body {
+  font: 5vmin "Century Gothic", Futura, sans-serif;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background: #151515;
+  color: #999;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+ol, ul {
+  padding-left: 5vmin;
+}
+
+ol li {
+  margin: 0;
+  font-size: 4vmin;
+  width: fit-content;
+}
+
+.status, .reverse, ol {
+  margin: 0 0 2vmin;
+}
+.status {
+  text-align: center;
+  font-size: 7vmin;
+}
+
+button {
+  font-size: 3.5vmin;
+  outline: none;
+  box-shadow: none;
+  background: #222;
+  border: solid 0.5vmin #555;
+  border-radius: 1.5vmin;
+  color: #BBB;
+  margin: 0 6vmin 1.9vmin 0;
+  width: 21vmin;
+  white-space: nowrap;
+}
+
+button.current {
+  border: solid 0.5vmin #fa0;
+}
+
+.square {
+  color: inherit;
+  background: #2a2a2a;
+  border: 0.5vmin solid #555;
+  border-radius: 15%;
+  float: left;
+  font-size: 8vmin;
+  font-weight: bold;
+  padding: 0;
+  margin: 0.5vmin;
+  text-align: center;
+  height: 14vmin;
+  width: 14vmin;
+}
+
+.square.winning {
+  border: solid 1vmin #fa0;
+}
+
+.game-board {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+}
+
+.game-board > div:first-child {
+  margin: 0 auto 2vmin;
+  width: max-content;
+}
+
+.game-info {
+  margin: 2vmin 0 0 7vmin;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.game-info input[type='checkbox']{
+  width:5vmin;
+ height:5vmin;
+ vertical-align: middle;
+ margin: 0 1vmin 1vmin;
+}
+
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 4vmin;
+  border-radius: 2vmin;
+  background: #555;
+  outline: none;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 50%;
+  width: 6vmin;
+  height: 6vmin;
+  background: #fa0;
+  cursor: pointer;
+}
+
+.slider::-webkit-slider-thumb,
+.slider::-moz-range-thumb {
+  width: 6vmin;
+  height: 6vmin;
+  background: #fa0;
+  cursor: pointer;
+}
+
+.boardSize {
+  margin: 0 auto;
+  width: 100vw;
+  display:block;
+  padding: 5vmin 10vmin;
+  box-sizing: border-box;
+}
+
+.boardSize span{
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 3vmin;
+}
+
+.history36 {column-count: 3;}
+.history30 {column-count: 3;}
+.history24 {column-count: 3;}
+.history18 {column-count: 3;}
+.history12 {column-count: 2;}
+.history6 {column-count: 2;}
+.history0 {column-count: 1;}
+
+@media (orientation:landscape) {
+
+  body {
+    font-size: 3.5vmin;
+  }
+
+  .boardSize {
+    margin: 0 0 0 3vmin;
+    width: 60vmin;
+    display: block;
+    float: left;
+    clear: left;
+    padding: 3vmin 4vmin 3vmin;
+    box-sizing: border-box;
+    grid-column-start: 1;
+    height: min-content;
+  }
+
+  .boardSize span{
+    margin-bottom: 1vmin;
+  }
+
+  .slider {
+    height: 2vmin;
+    border-radius: 1vmin;
+  }
+
+  .slider::-webkit-slider-thumb {
+    width: 3vmin;
+    height: 3vmin;
+  }
+  
+  .game {
+    display: grid;
+    grid-template-columns: min-content auto;
+    grid-template-rows: max-content auto;
+    align-items: start;
+  }
+
+  .slider::-webkit-slider-thumb,
+  .slider::-moz-range-thumb {
+    width: 3vmin;
+    height: 3vmin;
+  }
+
+  .square {
+    border-width: 0.4vmin;
+    font-size: 6vmin;
+    margin: 0.4vmin;
+    height: 11vmin;
+    width: 11vmin;
+  }
+
+  .small .square {
+    border-width: 0.6vmin;
+    font-size: 9vmin;
+    margin: 0.6vmin;
+    height: 16.5vmin;
+    width: 16.5vmin;
+  }
+
+  .small .square.winning {
+    border: solid 1.2vmin #fa0;
+  }
+
+  .game-board {
+    min-width: 60vmin;
+    display: block;
+    float: left;
+    clear: left;
+    flex-direction: column;
+    justify-content: left;
+    margin: 0 0 0 3vmin;
+    grid-column-start: 1;
+    grid-row-start: 2;
+  }
+
+  .game-info {
+    display: block;
+    float: left;
+    width: max-content;
+    grid-column-start: 2;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    margin: 2vmin 0 0 3vmin;
+  }
+
+  .status { 
+    clear: left;
+    padding-top: 2vmin;
+  }
+
+  .reverse {
+    margin-top: 2vmin;
+  }
+
+  button {
+    height: 6vmin;
+    margin: 0 6vmin 1.9vmin 0;
+  }
+
+  ol {
+    margin: 0 0 0 4vmin;
+  }
+
+  .history36 {column-count: 3;}
+  .history30 {column-count: 3;}
+  .history24 {column-count: 3;}
+  .history18 {column-count: 3;}
+  .history12 {column-count: 2;}
+  .history6 {column-count: 2;}
+  .history0 {column-count: 1;}
 }
