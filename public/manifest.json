@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "TicTac Extended",
+  "name": "TicTac Extended",
   "icons": [
     {
       "src": "favicon.ico",

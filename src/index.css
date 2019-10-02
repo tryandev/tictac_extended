@@ -19,8 +19,17 @@ ol li {
   margin: 0 0 2vmin;
 }
 .status {
-  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   font-size: 7vmin;
+}
+.status button { 
+  margin: 0 0 0 4vmin;
+  height: 7vmin;
+  width: auto;
+  padding: 0 2vmin;
 }
 
 button {
@@ -43,28 +52,34 @@ button.current {
 .square {
   color: inherit;
   background: #2a2a2a;
-  border: 0.5vmin solid #555;
+  border: 0.06em solid #555;
   border-radius: 15%;
   float: left;
-  font-size: 8vmin;
+  font-size: 1em;
   font-weight: bold;
   padding: 0;
-  margin: 0.5vmin;
+  margin: 0.06em;
   text-align: center;
-  height: 14vmin;
-  width: 14vmin;
+  height: 1.75em;
+  width: 1.75em;
 }
 
 .square.winning {
-  border: solid 1vmin #fa0;
+  border: solid 0.125em #fa0;
 }
 
 .game-board {
+  font-size: 8vmin;
   display: flex;
   flex-direction: column;
   align-content: center;
   justify-content: center;
 }
+
+.game-board .size2 { font-size: 2.70em; }
+.game-board .size3 { font-size: 1.80em; }
+.game-board .size4 { font-size: 1.35em; }
+.game-board .size5 { font-size: 1.08em; }
 
 .game-board > div:first-child {
   margin: 0 auto 2vmin;
@@ -77,13 +92,13 @@ button.current {
   flex-direction: column;
   justify-content: center;
 }
-.game-info input[type='checkbox']{
-  width:5vmin;
+
+input[type='checkbox']{
+width:5vmin;
  height:5vmin;
  vertical-align: middle;
  margin: 0 1vmin 1vmin;
 }
-
 
 .slider {
   -webkit-appearance: none;
@@ -112,21 +127,42 @@ button.current {
   cursor: pointer;
 }
 
-.boardSize {
-  margin: 0 auto;
-  width: 100vw;
-  display:block;
-  padding: 5vmin 10vmin;
+
+
+
+
+
+
+
+.game-options {
+  width: 100vmin;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+  padding: 6vmin 6vmin 4vmin;
   box-sizing: border-box;
 }
+.game-options .board-size {
+  width: 45vmin;
+}
 
-.boardSize span{
+.game-options span{
   display: block;
   margin: 0 auto;
   width: 100%;
   text-align: center;
   margin-bottom: 3vmin;
 }
+
+
+
+
+
+
+
+
 
 .history36 {column-count: 3;}
 .history30 {column-count: 3;}
@@ -141,20 +177,16 @@ button.current {
   body {
     font-size: 3.5vmin;
   }
-
-  .boardSize {
-    margin: 0 0 0 3vmin;
-    width: 60vmin;
-    display: block;
-    float: left;
-    clear: left;
-    padding: 3vmin 4vmin 3vmin;
-    box-sizing: border-box;
-    grid-column-start: 1;
-    height: min-content;
+  .game-options {
+    width: 70vmin;
+    padding: 3vmin 3vmin 3vmin;
   }
 
-  .boardSize span{
+  .game-options .board-size {
+    width: 30vmin;
+  }
+
+  .game-options span {
     margin-bottom: 1vmin;
   }
 
@@ -181,26 +213,6 @@ button.current {
     height: 3vmin;
   }
 
-  .square {
-    border-width: 0.4vmin;
-    font-size: 6vmin;
-    margin: 0.4vmin;
-    height: 11vmin;
-    width: 11vmin;
-  }
-
-  .small .square {
-    border-width: 0.6vmin;
-    font-size: 9vmin;
-    margin: 0.6vmin;
-    height: 16.5vmin;
-    width: 16.5vmin;
-  }
-
-  .small .square.winning {
-    border: solid 1.2vmin #fa0;
-  }
-
   .game-board {
     min-width: 60vmin;
     display: block;
@@ -211,6 +223,7 @@ button.current {
     margin: 0 0 0 3vmin;
     grid-column-start: 1;
     grid-row-start: 2;
+    font-size: 5.3vmin !important;
   }
 
   .game-info {

@@ -13,10 +13,10 @@ class Game extends React.Component {
                 piece: null,
                 squareNum: -1,
             }],
-            xIsNext: true,
-            cursor: 0,
             reverse: true,
-            size: 3,
+            twice: true,
+            cursor: 0,
+            size: 4,
         }
     }
 
@@ -27,27 +27,29 @@ class Game extends React.Component {
         const squares = current.squares.slice();
         const calc = calculateWinner(squares, this.state.size);
         const winner = squares[calc[0]];
-        if (winner || squares[i]) {
-            return;
-        }
+        const turns = this.state.twice ? 2 : 1;
+
+        if (winner || squares[i]) return;
+
+        const xIsNext = Math.floor(cursor / turns) % 2 === 0;
+        squares[i] = xIsNext ? 'X' : 'O';
+
         cursor++;
-        squares[i] = this.state.xIsNext ? 'X' : 'O';
         let newHistory = history.slice(0, cursor).concat([{
             squares: squares,
             piece: squares[i],
             squareNum: i,
         }]);
+
         this.setState({
             history: newHistory,
-            xIsNext: !this.state.xIsNext,
             cursor: cursor,
         });
     } 
 
-    changeBoardSize(e) {
-        this.setState({
-            size: e.target.value
-        });
+    changeOptions(e) {
+        if (e.target.name === "board-size") this.setState({size: e.target.value});
+        if (e.target.name === "two-turns") this.setState({twice: e.target.checked});
         return true;
     }
 
@@ -59,8 +61,18 @@ class Game extends React.Component {
 
     handleTimeTravel(i) {
         this.setState({
-            xIsNext: (i % 2) === 0,
             cursor: i,
+        });
+    }
+
+    newGame(e) {
+        this.setState({
+            history: [{
+                squares: [],
+                piece: null,
+                squareNum: -1,
+            }],
+            cursor: 0,
         });
     }
 
@@ -74,21 +86,43 @@ class Game extends React.Component {
         let historyClass = "history" + (Math.floor(history.length / 6) * 6);
 
         let status;
+        let gameEnd = false;
         if (winner) {
-            status = 'Winner: ' + winner;
+            status = `Winner: ${winner}`;
+            gameEnd = true;
         } else if (cursor >= this.state.size * this.state.size) {
             status = `Draw game`;
+            gameEnd = true;
         } else {
-            status = `Current play: ${this.state.xIsNext ? 'X' : 'O'}`;
+            const turns = this.state.twice ? 2 : 1;
+            const xIsNext = Math.floor(cursor / turns) % 2 === 0;
+            status = `${xIsNext ? 'X' : 'O'}'s turn`;
+        }
+
+        let newGameBtn = null;
+        if (gameEnd) {
+            newGameBtn = (
+                <button onClick={(e) => this.newGame(e)}>
+                    NEW GAME
+                </button>
+            );
         }
 
         return (
             <div className="game">
-                <div className="boardSize">
-                    <label>
-                        <span> Game board size: {this.state.size}x{this.state.size}</span>
-                       <input type="range" min="2" max="5" className="slider" value={this.state.size} onChange={(e) => this.changeBoardSize(e)} />
-                    </label>
+                <div className="game-options">
+                    <div className="board-size">
+                        <label>
+                            <span>Board size: {this.state.size}x{this.state.size}</span>
+                        <input name="board-size" type="range" min="2" max="5" className="slider" value={this.state.size} onChange={(e) => this.changeOptions(e)} />
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <input name="two-turns" type="checkbox" checked={this.state.twice} onChange={(e) => this.changeOptions(e)} />
+                            Two turns
+                        </label>
+                    </div>
                 </div>
                 <div className="game-board">
                     <Board 
@@ -97,7 +131,10 @@ class Game extends React.Component {
                         squares={current.squares}
                         onClick={(i) => this.handleClick(i)}
                     />
-                    <div className="status">{status}</div>
+                    <div className="status">
+                        <span>{status}</span>
+                        { newGameBtn }
+                    </div>
                 </div>
                 <div className="game-info">
                     <div className="reverse">

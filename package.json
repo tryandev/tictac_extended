@@ -1,7 +1,7 @@
 {
-  "name": "my-app",
+  "name": "tictac-extended",
   "version": "0.1.0",
-  "homepage": "http://tryandev.github.io//tictac_extended",
+  "homepage": "https://tryandev.github.io/tictac_extended",
   "private": true,
   "dependencies": {
     "react": "^16.9.0",

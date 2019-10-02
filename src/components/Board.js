@@ -17,7 +17,6 @@ class Board extends React.Component {
     render() {
         let rows = [];
         let size = this.props.size;
-        let sizeClass = size <= 3 ? "small" : "";
         for (let y = 0; y < size; y++) {
             let cols = [];
             for (let x = 0; x < size; x++){
@@ -26,6 +25,8 @@ class Board extends React.Component {
             let row = <div key={y} className="board-row">{cols}</div>;
             rows.push(row);
         }
+
+        let sizeClass = `size${size}`;
         return (
             <div className={sizeClass}>
                 {rows}
